@@ -6,3 +6,5 @@ Then we run deneme.sh to get the status codes, redirected final urls and content
 
 
 Webtech-master file is needed for the technology finding script.
+
+PhishingDetectionFlow.drawio.pdf shows the flow of the scripts.
