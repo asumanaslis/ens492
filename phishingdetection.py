@@ -58,7 +58,7 @@ TrancoListdf1 = pd.DataFrame(list(TrancoList1.find()))
 TrancoListdf3 = pd.DataFrame(list(TrancoList3.find()))
 openPhishContent = pd.DataFrame(list(openPhishContent.find()))
 
-!curl ipecho.net/plain
+# !curl ipecho.net/plain
 
 from pymongo import MongoClient
 import pymongo
@@ -117,9 +117,9 @@ TrancoListdf.drop(index5, inplace=True)
 openPhishContent.drop_duplicates(inplace=True)
 TrancoListdf.drop_duplicates(inplace=True)
 
-openPhishContent
+#openPhishContent
 
-TrancoListdf
+#TrancoListdf
 
 textfile = open('/content/drive/MyDrive /ENS 491 Phishing detection/suspwords.txt')
 susp_words = []
@@ -271,6 +271,9 @@ for index, row in openPhishContent.iterrows():
                                    extension(row['url']),entropy(row['url']),alexa_ngram_count(row['url']),dict_ngram_count(row['url']),
                                    squatting(row['url']),True]
 
+    
+# content features
+
 def ct_js(text):
   return text.count(".js")
 
@@ -358,8 +361,6 @@ def ct_button(text):
 def ct_label(text):
   return text.count("<label")
 
-# YENİ
-
 def ct_input_password(text):
   return text.count("type=\"password\"")
 
@@ -425,8 +426,6 @@ def ct_pinterest(text):
 
 def ct_linkedin(text):
   return text.lower().count("linkedin")
-
-###
 
 def ct_hidden(text):
   return text.count('hidden') + text.count(".hidden") + text.count("#hidden") + text.count("\"hidden") + text.count("*[visibility=\"none\"]") + text.count("*[display=\"none\"]")
@@ -743,10 +742,7 @@ stats.sort_values("ratio",ascending=False)
 
 training_df2 = training_df.drop(['input_reset','innerText','embed','input_text','accesskey','at','equal','input_checkbox','input_search'], axis=1)
 
-"""Feature Extraction
-
-dict_ngram_count len tags	extlink	u_length entropy querySelectorAll digit dot setAttribute removeEventListener hyphen removeAttribute input_pass input_date
-"""
+"""Feature Extraction"""
 
 hist = training_df2['tags'].hist(bins=100, grid=False, figsize=(25,3), range=[0, 500])
 training_df2['tags'].median()
