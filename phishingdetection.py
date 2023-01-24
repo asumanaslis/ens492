@@ -26,7 +26,9 @@ for line in file:
 phishings = pd.DataFrame(phishings1) 
 
 import pandas as pd
-not_phishing = pd.read_csv(r'/content/drive/MyDrive /ENS 491 Phishing detection/not_phishing.txt', header=None)
+
+# not_phishing = pd.read_csv(r'/content/drive/MyDrive /ENS 491 Phishing detection/not_phishing.txt', header=None)
+not_phishing = pd.read_csv(r'files/not_phishing.txt', header=None)
 
 url_training_data = pd.DataFrame()
 url_training_data['urls'] = phishings
@@ -34,7 +36,8 @@ url_training_data['urls'] = phishings
 not_phishing.columns = ['index', 'urls']
 not_phishing = not_phishing.drop(labels='index', axis=1)
 
-textfile = open('/content/drive/MyDrive /ENS 491 Phishing detection/not_phishing.txt')
+# textfile = open('/content/drive/MyDrive /ENS 491 Phishing detection/not_phishing.txt')
+textfile = open('files/not_phishing.txt')
 dict1 = []
 dict2 = []
 for line in textfile:
@@ -124,7 +127,9 @@ TrancoListdf.drop_duplicates(inplace=True)
 
 #TrancoListdf
 
-textfile = open('/content/drive/MyDrive /ENS 491 Phishing detection/suspwords.txt')
+# textfile = open('/content/drive/MyDrive /ENS 491 Phishing detection/suspwords.txt')
+textfile = open('files/suspwords.txt')
+
 susp_words = []
 
 for line in textfile:
@@ -153,7 +158,8 @@ def squatting_list (domain1):   # Typo-Squatting/Bitsquatting
 #     sq.write(word)
 #     sq.write('\n')
 
-sq_list = pd.read_csv(r'/content/drive/MyDrive /ENS 491 Phishing detection/sq_list.txt', header=None, names=['squatting'])
+# sq_list = pd.read_csv(r'/content/drive/MyDrive /ENS 491 Phishing detection/sq_list.txt', header=None, names=['squatting'])
+sq_list = pd.read_csv(r'files/sq_list.txt', header=None, names=['squatting'])
 
 def squatting(domain):
   for i in sq_list['squatting']:
@@ -243,7 +249,9 @@ def alexa_ngram_count(domain):
 
 #ngram_count('free-online-directory')
 
-word_dataframe = pd.read_csv(r'/content/drive/MyDrive /ENS 491 Phishing detection/words.txt', names=['word'], header=None, dtype={'word': np.str}, encoding='utf-8')
+# word_dataframe = pd.read_csv(r'/content/drive/MyDrive /ENS 491 Phishing detection/words.txt', names=['word'], header=None, dtype={'word': np.str}, encoding='utf-8')
+word_dataframe = pd.read_csv(r'files/words.txt', names=['word'], header=None, dtype={'word': np.str}, encoding='utf-8')
+
 
 word_dataframe = word_dataframe[word_dataframe['word'].map(lambda x: str(x).isalpha())]
 word_dataframe = word_dataframe.applymap(lambda x: str(x).strip().lower())
@@ -1300,19 +1308,21 @@ domains1 = whoisds['url']
 domains['y_pred'] = y_pred[0]
 
 #y_pred.to_csv('y_pred.csv') 
-domains.to_csv('/content/drive/MyDrive/ENS 491 Phishing detection/domains.csv')
+# domains.to_csv('/content/drive/MyDrive/ENS 491 Phishing detection/domains.csv')
+#domains.to_csv('files/domains.csv')
 
-domains
-
-domains_pred = domains1.apply(domain).apply(domain)
+# domains
 
 from google.colab import drive
 drive.mount('/content/drive', force_remount=True)
 
 import pandas as pd
 
-domains = pd.read_csv('/content/drive/MyDrive/ENS 491 Phishing detection/domains.csv')
+# domains = pd.read_csv('/content/drive/MyDrive/ENS 491 Phishing detection/domains.csv')
+domains = pd.read_csv('files/domains.csv')
 domains.drop(columns=domains.columns[0], axis=1,  inplace=True)
+
+domains_pred = domains1.apply(domain).apply(domain)
 
 import pandas as pd
 
