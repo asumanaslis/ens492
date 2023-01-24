@@ -60,7 +60,6 @@ TrancoListdf1 = pd.DataFrame(list(TrancoList1.find()))
 TrancoListdf3 = pd.DataFrame(list(TrancoList3.find()))
 openPhishContent = pd.DataFrame(list(openPhishContent.find()))
 
-# !curl ipecho.net/plain
 
 from pymongo import MongoClient
 import pymongo
@@ -119,6 +118,8 @@ TrancoListdf.drop(index5, inplace=True)
 openPhishContent.drop_duplicates(inplace=True)
 TrancoListdf.drop_duplicates(inplace=True)
 
+# training sets are ready 
+
 #openPhishContent
 
 #TrancoListdf
@@ -129,7 +130,7 @@ susp_words = []
 for line in textfile:
   susp_words.append(line[:-1])
 
-!pip install dnstwist
+pip install dnstwist
 import dnstwist
 
 squatting = [] 
@@ -273,7 +274,7 @@ for index, row in openPhishContent.iterrows():
                                    extension(row['url']),entropy(row['url']),alexa_ngram_count(row['url']),dict_ngram_count(row['url']),
                                    squatting(row['url']),True]
 
-    
+# url df is ready   
 # content features
 
 def ct_js(text):
@@ -557,7 +558,7 @@ for index, row in openPhishContent.iterrows():
                                            ct_innerText(row['content']), ct_removeAttribute(row['content']), ct_removeEventListener(row['content']), 
                                            ct_setAttribute(row['content']), ct_querySelectorAll(row['content']), ct_freeze(row['content']), ct_throwError(row['content']), 
                                            ct_call(row['content']),True] 
-
+#content df is ready
 
 training_df = pd.merge(urldf, contentdf, left_index=True, right_index=True)
 training_df = training_df.drop('domain_y',axis='columns')
